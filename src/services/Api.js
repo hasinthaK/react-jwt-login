@@ -1,5 +1,4 @@
 import constants from '../constants';
-import {getAuth} from './LoginService';
 
 const API_BASE = constants.API_BASE;
 
@@ -52,8 +51,15 @@ export const post = async (url, options = {}) => {
  * @param {object} options 
  * @returns - object
  */
-export const authReq = async (url, options = {method: 'GET'}) => {
-    const authStatus = getAuth();
+export const authReq = async (url, options = { method: 'GET' }) => {
+    let authStatus = null;
+    // try to get & parse local auth state
+    try {
+        authStatus = JSON.parse(localStorage.getItem('persist:root'));
+    } catch (e) {
+        console.error(e);
+    }
+
     if (!authStatus) return new Error('You are not logged in!');
 
     // fetch only if auth status available

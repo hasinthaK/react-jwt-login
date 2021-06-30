@@ -1,17 +1,16 @@
 import React from 'react';
-import { useContext } from 'react';
 import { useHistory } from 'react-router';
-import { Context } from '../services/ConfigProvider';
-import { logout } from '../services/LoginService';
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutUser } from '../ducks/user.ducks';
 
 const Profile = (props) => {
 
-    const { auth, setAuth } = useContext(Context);
+    const authState = useSelector(state => state.auth);
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const handleLogout = () => {
-        logout();
-        setAuth(null);
+        dispatch(logoutUser());
         history.push('');
     }
 
@@ -25,7 +24,9 @@ const Profile = (props) => {
                 </header>
 
                 <div>
-                    {auth.fname}
+                    {authState.user.id},
+                    {authState.user.email},
+                    {authState.user.password}
                 </div>
             </section>
              

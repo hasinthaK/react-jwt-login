@@ -2,6 +2,8 @@
 # JWT Login React app
 ## Bare minimum template app built with React for JWT login.
 
+### Branch `master`
+
 ### Included routes (components)
 |Component|Path|
 |---------|----|
@@ -18,6 +20,15 @@
 - Revise the endpoint URLs in the service files from the directory `./src/services`.
 
 ---
+
+### Branch `redux`
+This branch contains implementation for same functionality with using Redux lvrary for state managment.
+
+- `ducks` pattern is being followed for redux implementation. [Read more on ducks](https://github.com/erikras/ducks-modular-redux).
+Simple explanation: (ducks: all the actions, action creators & the reducers relating one domain sits inside a single file)
+
+---
+<br/>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

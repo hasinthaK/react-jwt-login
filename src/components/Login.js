@@ -1,9 +1,8 @@
 import React from 'react';
-import { useContext } from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-import { Context } from '../services/ConfigProvider';
-import { login } from '../services/LoginService';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../ducks/user.ducks';
 
 const Login = (props) => {
 
@@ -11,7 +10,7 @@ const Login = (props) => {
     const [isLoginFormInvalid, setisLoginFormInvalid] = useState(true);
 
     const history = useHistory();
-    const appContext = useContext(Context);
+    const dispatch = useDispatch();
 
     const handleInputChange = (e) => {
         e.persist();
@@ -29,9 +28,7 @@ const Login = (props) => {
     const handleLogin = async () => {
         if (loginCreds.email === '' || loginCreds.password === '') return alert('Both are required!');
         try {
-            const user = await login(loginCreds);
-            appContext.setAuth(user);
-
+            dispatch(loginUser({ email: loginCreds.email, password: loginCreds.password }));
             history.push('/profile');
         } catch (err) {
             console.error(err.message);
