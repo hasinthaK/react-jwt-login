@@ -1,6 +1,6 @@
 
 # JWT Login React app
-## Bear minimum template app built with React for JWT login.
+## Bare minimum template app built with React for JWT login.
 
 ### Included routes (components)
 |Component|Path|

@@ -32,7 +32,7 @@ export const get = async (url, options = {}) => {
 export const post = async (url, options = {}) => {
     console.log('POST op: ', options);
     const response = await fetch(`${API_BASE}${url}`, {
-        headers: { ...options.headers, 'Content-type': 'application/json' },
+        headers: { 'Content-type': 'application/json', ...options.headers },
         ...options,
         body: (options.body instanceof Object)? JSON.stringify(options.body) : options.body,
         method: 'POST'
