@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import createSagaMiddleware from 'redux-saga';
@@ -31,8 +31,11 @@ const sagaMiddleware = createSagaMiddleware();
 // add all the middleware here
 const middleware = [sagaMiddleware];
 
+// redux devtools
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 // redux store & persist store
-const store = createStore(persistedReducer, {}, applyMiddleware(...middleware));
+const store = createStore(persistedReducer, {}, composeEnhancers(applyMiddleware(...middleware)));
 export const persistor = persistStore(store);
 
 // start watcherSaga for saga actions

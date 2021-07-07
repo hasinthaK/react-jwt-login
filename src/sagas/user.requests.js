@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { toggleLoader } from '../ducks/loading.ducks';
-import { setAppAuth } from '../ducks/user.ducks';
+import { setAppAuth, setAuthError } from '../ducks/user.ducks';
 import { post } from '../services/Api';
 
 // LOGIN_USER handler
@@ -12,6 +12,7 @@ export function* loginRequest(action) {
         yield put(setAppAuth({ token: 'Token', user: loginResponse }));
     } catch (e) {
         console.error(e);
+        yield put(setAuthError(e.message));
     }
     // stop loader
     yield put(toggleLoader({ request: 'app', loading: false }));
